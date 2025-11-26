@@ -1,10 +1,11 @@
-# requirements: Python 3.10+
-python -m venv .venv
-source .venv/bin/activate         # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
+PYTHON ?= python
 
-# sample run (uses sample data by default)
-python src/run.py "Analyze ROAS drop"
-
-# use config to switch to full data (see config/config.yaml)
-
+.PHONY: install run test format lint
+install:
+	$(PYTHON) -m venv .venv
+	. .venv/bin/activate && pip install -r requirements.txt
+run:
+	@[ -n "$$QUERY" ] || (echo "Usage: make run QUERY='Analyze ROAS drop'"; exit 1)
+	$(PYTHON) src/run.py "$(QUERY)"
+test:
+	$(PYTHON) -m pytest -q
