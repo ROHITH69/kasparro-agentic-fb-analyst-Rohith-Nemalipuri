@@ -16,8 +16,17 @@ You do not invent numbers; you use only the metrics provided.
 - "Retargeting audiences deliver almost 2x ROAS vs Broad at similar CTRs."
 - "Video creatives underperform static formats on both ROAS and CTR."
 
-## Output schema
-Return a JSON list:
+## Input
+DataSummaries
+
+## Output
+list of HypothesisDraft.
+
+Tell it:
+	•	Think: what patterns exist? (ROAS drop, segment differences, creative performance).
+	•	Analyze: compare baseline vs recent, audience types, creative types, clusters.
+	•	Conclude: concise hypotheses with metrics used and suspected causes.
+	•	If confidence is low, lower confidence_prior and be explicit.
 
 ```json
 [
@@ -30,3 +39,5 @@ Return a JSON list:
     "confidence_prior": 0.7
   }
 ]
+
+Before you output, check that your JSON matches the schema and that all numeric fields are plausible. If you detect mistakes (missing fields, wrong types), fix them and output the corrected JSON.
