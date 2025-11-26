@@ -8,4 +8,4 @@ run:
 	@[ -n "$$QUERY" ] || (echo "Usage: make run QUERY='Analyze ROAS drop'"; exit 1)
 	$(PYTHON) src/run.py "$(QUERY)"
 test:
-	$(PYTHON) -m pytest -q
+	\tpytest -q
