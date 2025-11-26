@@ -2,21 +2,41 @@
 Hi — I’m Rohith. This repository contains my submission for the **Kasparro Agentic Facebook Performance Analyst** assignment.
 It builds a small agentic system that diagnoses Facebook Ads ROAS/CTR drops and proposes creative adjustments for low-CTR campaigns.
 
----
-## Quick start (run locally)
+The system takes a marketer query (e.g.,"Analyze ROAS drop in the last 7 days") and produces:
+- A structured set of **insights** (`reports/insights.json`)
+- **Creative improvement ideas** (`reports/creatives.json`)
+- A **human-readable diagnosis** (`reports/report.md`)
+- Basic **JSON logs** for observability (`logs/run_logs.json`)
 
-Requirements:
-- Python 3.10+
-- Create and activate a virtualenv
+The implementation is intentionally lightweight and framework-free so you can
+inspect the agents, prompts, and orchestration clearly.
+---
+
+## Quick Start
 
 ```bash
-python -m venv .venv
-# mac/linux
-source .venv/bin/activate
-# windows (powershell)
-.venv\Scripts\Activate.ps1
+python -V  # should be >= 3.10
 
+# 1. Create and activate a virtualenv
+python -m venv .venv
+# macOS / Linux:
+source .venv/bin/activate
+# Windows (PowerShell):
+# .venv\Scripts\Activate.ps1
+
+# 2. Install dependencies
 pip install -r requirements.txt
+
+# 3. Run the agentic analyst
+export DATA_CSV="data/synthetic_fb_ads_undergarments.csv"
+python src/run.py "Analyze why ROAS dropped in the last 14 days"
+
+# Outputs:
+# - reports/report.md
+# - reports/insights.json
+# - reports/creatives.json
+# - logs/run_logs.json
+```
 -----------------------------------------------------------------------------------------------------------------------------------------
 ## Project plan
 
@@ -39,3 +59,4 @@ Phase D — Validation & reports (1–2 hours)
 
 Phase E — Finalize submission (30–60 minutes)
 - Make 3+ commits, create PR "self-review", tag `v1.0`, push, and share repo link + commit hash + run command.
+
