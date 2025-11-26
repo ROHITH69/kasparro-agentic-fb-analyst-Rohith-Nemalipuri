@@ -34,5 +34,5 @@ The analyst loads the CSV and:
 
 By default, `config/config.yaml` points here, but you can override via:
 ```bash
-export DATA_CSV=kasparro-agentic-fb-analyst-Rohith-Nemalipuri/data/synthetic_fb_ads_undergarments.csv
+export DATA_CSV="kasparro-agentic-fb-analyst-Rohith-Nemalipuri/data/synthetic_fb_ads_undergarments.csv"
 
