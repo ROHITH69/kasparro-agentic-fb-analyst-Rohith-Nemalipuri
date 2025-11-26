@@ -28,7 +28,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 
 # 3. Run the agentic analyst
-export DATA_CSV="kasparro-agentic-fb-analyst-Rohith-Nemalipuri/data/synthetic_fb_ads_undergarments.csv"
+export DATA_CSV="data/synthetic_fb_ads_undergarments.csv"
 python src/run.py "Analyze why ROAS dropped in the last 14 days"
 
 # Outputs:
