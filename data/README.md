@@ -35,4 +35,36 @@ The analyst loads the CSV and:
 By default, `config/config.yaml` points here, but you can override via:
 ```bash
 export DATA_CSV="data/synthetic_fb_ads_undergarments.csv"
+```
+--------------------------------------------------------------------------------------------------------------------------------
+## Configuration
 
+All tunable behaviour is controlled via `config/config.yaml` — nothing is hardcoded in the code.
+Key sections:
+
+- `data`  
+  - `csv_path`: default location of the synthetic FB ads dataset.  
+    If the `DATA_CSV` environment variable is set, it overrides this path.  
+  - `date_column`: name of the date column in the CSV.
+
+- `windows`  
+  - `baseline_days` and `comparison_days`: how many days are used for the
+    “before vs after” ROAS comparison (e.g. first 14 vs last 14 days).
+
+- `run`  
+  - `random_seed`: global seed used for any sampling/shuffling and creative
+    variation, so runs are reproducible.
+
+- `thresholds`  
+  - `min_impressions`, `min_spend`, `min_purchases`: minimum volume required
+    for a campaign/adset cluster to be included in insights (prevents noise
+    from tiny segments).  
+  - `roas_drop_pct_strong`, `roas_drop_pct_partial`: ROAS change thresholds
+    used by the Evaluator Agent to classify a hypothesis as `strong_support`,
+    `partial`, or `rejected`.  
+  - `low_ctr_pct_below_account`: how far below the account-wide CTR a cluster
+    must be to be flagged as “low CTR” and passed to the Creative Generator.
+
+The agents (DataAgent, InsightAgent, EvaluatorAgent, CreativeGenerator) all
+read these values from `config/config.yaml`. To change behaviour, update the
+YAML file — no code changes are required.
