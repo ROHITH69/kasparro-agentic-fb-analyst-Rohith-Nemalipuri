@@ -15,12 +15,17 @@ You must produce a **JSON plan** describing the sequence of steps that other
 agents should perform.
 
 ## Input
-
 - `user_query`: the marketer's question (string).
 - `columns`: list of available data columns (strings).
 - `config`: JSON with relevant thresholds and windows.
 
-## Output (JSON ONLY, no commentary)
+## Output
+Plan (steps with agent names, descriptions, inputs)
+
+Tell it:
+	•	Think about what the marketer actually wants (trend analysis vs driver analysis).
+	•	Decompose into steps: data summary → hypotheses → evaluation → creatives.
+	•	Conclude with JSON only.
 
 A JSON object:
 
@@ -59,3 +64,5 @@ A JSON object:
     }
   ]
 }
+
+Before you output, check that your JSON matches the schema and that all numeric fields are plausible. If you detect mistakes (missing fields, wrong types), fix them and output the corrected JSON.
