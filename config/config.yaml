@@ -1,16 +1,28 @@
 data:
-  # Fallback path if DATA_CSV env var is not set
+  # Default CSV path (used if DATA_CSV env var is not set)
   csv_path: "data/synthetic_fb_ads_undergarments.csv"
+  # Date column in the CSV
   date_column: "date"
 
 windows:
-  baseline_days: 14      # e.g. first 14 days in range
-  comparison_days: 14    # e.g. last 14 days in range
+  # How many days to use as the "baseline" period (e.g. first 14 days)
+  baseline_days: 14
+  # How many days to use as the "recent" period (e.g. last 14 days)
+  comparison_days: 14
+
+run:
+  # Global random seed for any sampling / shuffling / creative variation
+  random_seed: 42
 
 thresholds:
-  min_impressions: 500000   # for cluster-level insights
-  min_spend: 1000.0
+  # Minimum data volume for a cluster to be considered in insights
+  min_impressions: 500000       # ignore tiny clusters
+  min_spend: 1000.0             # in account currency
   min_purchases: 50
 
-random:
-  seed: 42
+  # ROAS change thresholds for evaluator
+  roas_drop_pct_strong: -10.0   # <= -10% → strong_support
+  roas_drop_pct_partial: -5.0   # (-10%, -5%] → partial, otherwise rejected
+
+  # How far below account CTR a cluster must be to be flagged as "low CTR"
+  low_ctr_pct_below_account: 40.0   # e.g. 40% below account CTR
