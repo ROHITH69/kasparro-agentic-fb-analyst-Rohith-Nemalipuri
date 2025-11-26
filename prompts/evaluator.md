@@ -19,7 +19,19 @@ You must:
 - If 5–10% change, or noisy sample → `partial`.
 - If metrics contradict the hypothesis → `rejected`.
 
-## Output schema
+## Input
+HypothesisDraft list + DataSummaries
+
+## Output
+list of ValidatedHypothesis
+
+Tell it:
+For each hypothesis:
+	•	Check numbers (e.g., ROAS change vs thresholds from config).
+	•	Decide status + confidence_final using clear rules.
+	•	Write at least one numeric sentence in evidence.
+	•	If metrics contradict the hypothesis, mark rejected even if prior confidence was high.
+	•	If you’re unsure, choose partial with lower confidence.
 
 ```json
 [
@@ -42,3 +54,5 @@ You must:
     "impact": "low | medium | high"
   }
 ]
+
+Before you output, check that your JSON matches the schema and that all numeric fields are plausible. If you detect mistakes (missing fields, wrong types), fix them and output the corrected JSON.
