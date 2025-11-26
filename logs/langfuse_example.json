@@ -1,1 +1,10 @@
-
+{
+  "trace_id": "sample-trace-id",
+  "steps": [
+    {
+      "name": "planner",
+      "input": { "user_query": "Analyze why ROAS dropped in the last 14 days" },
+      "output": { "steps": ["data_agent", "insight_agent", "evaluator", "creative_generator"] }
+    }
+  ]
+}
