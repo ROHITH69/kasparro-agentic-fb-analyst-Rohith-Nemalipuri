@@ -29,7 +29,7 @@ summaries** that other agents can reason over safely.
    - Compute CTR and ROAS.
    - Return the **top 10 lowest CTR clusters** as a list.
 
-##Input
+## Input
 Pre-aggregated stats / config (or instructions for what Python will aggregate)
 
 ## Output
