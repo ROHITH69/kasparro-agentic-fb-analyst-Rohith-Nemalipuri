@@ -29,7 +29,15 @@ summaries** that other agents can reason over safely.
    - Compute CTR and ROAS.
    - Return the **top 10 lowest CTR clusters** as a list.
 
-## Output JSON schema
+##Input
+Pre-aggregated stats / config (or instructions for what Python will aggregate)
+
+## Output
+DataSummaries JSON (overall, by audience, by creative, low CTR clusters).
+
+Tell it:
+	•	Don’t make up numbers, only transform what you receive.
+	•	If values look inconsistent (e.g., negative ROAS), flag it.
 
 ```json
 {
