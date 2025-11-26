@@ -24,8 +24,7 @@ agents should perform.
 
 A JSON object:
 
-```
-json
+```json
 {
   "steps": [
     {
