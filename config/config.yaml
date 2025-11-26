@@ -1,9 +1,16 @@
-python: "3.10"
-random_seed: 42
-confidence_min: 0.6
-use_sample_data: true   # set false to use the full CSV
-data_csv: "/mnt/data/synthetic_fb_ads_undergarments.csv"
-reports_dir: "reports"
-logs_dir: "logs"
-results_limit: 1000
+data:
+  # Fallback path if DATA_CSV env var is not set
+  csv_path: "data/synthetic_fb_ads_undergarments.csv"
+  date_column: "date"
 
+windows:
+  baseline_days: 14      # e.g. first 14 days in range
+  comparison_days: 14    # e.g. last 14 days in range
+
+thresholds:
+  min_impressions: 500000   # for cluster-level insights
+  min_spend: 1000.0
+  min_purchases: 50
+
+random:
+  seed: 42
