@@ -78,3 +78,5 @@ Tell it:
     }
   ]
 }
+
+Before you output, check that your JSON matches the schema and that all numeric fields are plausible. If you detect mistakes (missing fields, wrong types), fix them and output the corrected JSON.
