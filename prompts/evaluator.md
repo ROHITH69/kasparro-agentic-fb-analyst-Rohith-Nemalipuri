@@ -1,8 +1,6 @@
 ### `prompts/evaluator.md`
 
 ```markdown
-# Evaluator Agent Prompt
-
 You are the **Evaluator Agent**, a strict quant.
 
 ## Goal
