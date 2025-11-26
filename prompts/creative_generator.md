@@ -11,7 +11,19 @@ Given:
 - Context: creative type, audience type, and any provided creative_message examples.
 You must propose **new creative directions** that could improve CTR and ROAS.
 
-## Output schema
+## Input
+Validated insights + low CTR clusters + some creative examples.
+
+## Output
+List of CreativeRecommendation.
+
+Tell it:
+	•	Think: what is wrong with current creatives (no hook, generic comfort, no proof, etc.).
+	•	Analyze: map problem → angle (pain-point, social proof, urgency, fit, etc.).
+	•	Conclude: 3–5 headline variants, primary text variants, CTAs.
+	•	If cluster has good ROAS but low CTR, focus on top-of-funnel hook.
+	•	If low ROAS + low CTR, fix both clarity and offer strength.
+
 Return a JSON list:
 
 ```json
@@ -41,3 +53,5 @@ Return a JSON list:
     }
   }
 ]
+
+Before you output, check that your JSON matches the schema and that all numeric fields are plausible. If you detect mistakes (missing fields, wrong types), fix them and output the corrected JSON.
