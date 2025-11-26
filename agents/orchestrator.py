@@ -1,78 +1,145 @@
-# src/orchestrator.py
-import os
+from pathlib import Path
 import json
-from agents.planner import PlannerAgent
-from agents.data_agent import DataAgent
-from agents.insight_agent import InsightAgent
-from agents.evaluator import EvaluatorAgent
-from agents.creative_generator import CreativeGenerator
-from utils.io import write_json, ensure_dir
-from datetime import datetime
+from typing import Any, Dict
 
-class Orchestrator:
-    def __init__(self, cfg):
-        self.cfg = cfg
-        self.data_agent = DataAgent(cfg)
-        self.planner = PlannerAgent(cfg)
-        self.insight_agent = InsightAgent(cfg)
-        self.evaluator = EvaluatorAgent(cfg)
-        self.creative_gen = CreativeGenerator(cfg)
-        ensure_dir(cfg["reports_dir"])
-        ensure_dir(cfg["logs_dir"])
+import pandas as pd
 
-    def run(self, query):
-        trace = {"query": query, "started_at": datetime.utcnow().isoformat()}
-        # 1. Planner: decompose
-        plan = self.planner.decompose(query)
-        trace["plan"] = plan
+from .agents.planner import PlannerAgent
+from .agents.data_agent import DataAgent
+from .agents.insight_agent import InsightAgent
+from .agents.evaluator import EvaluatorAgent
+from .agents.creative_generator import CreativeGeneratorAgent
+from .utils.logging_utils import log_event
+from .utils.io import load_config, load_data
 
-        # 2. Data agent: load & summarize (only pass summaries forward)
-        data_summary = self.data_agent.load_and_summarize()
-        trace["data_summary"] = data_summary
+def run_query(user_query: str) -> Dict[str, Any]:
+    config = load_config()
+    df: pd.DataFrame = load_data(config)
 
-        # 3. Insight agent: hypotheses
-        hypotheses = self.insight_agent.generate(data_summary, plan)
-        trace["hypotheses"] = hypotheses
+    log_event("start", {"user_query": user_query})
 
-        # 4. Evaluator: validate
-        evaluated = self.evaluator.validate(hypotheses, self.data_agent.dataframe)
-        trace["evaluated"] = evaluated
+    # Planner
+    planner = PlannerAgent(config=config)
+    plan = planner.plan(user_query=user_query, df_columns=list(df.columns))
+    log_event("planner", {"plan": plan})
 
-        # 5. Creative generator: generate creatives for low-CTR campaigns
-        creatives = self.creative_gen.generate(evaluated, data_summary)
-        trace["creatives"] = creatives
+    # Data Agent
+    data_agent = DataAgent(config=config)
+    summaries = data_agent.summarize(df=df, plan=plan)
+    log_event("data_agent", {"summaries_keys": list(summaries.keys())})
 
-        # 6. Write outputs
-        ts = datetime.utcnow().strftime("%Y%m%dT%H%M%SZ")
-        write_json(evaluated, os.path.join(self.cfg["reports_dir"], "insights.json"))
-        write_json(creatives, os.path.join(self.cfg["reports_dir"], "creatives.json"))
-        # Basic report
-        report_md = self._build_report(evaluated, creatives, data_summary, plan)
-        with open(os.path.join(self.cfg["reports_dir"], "report.md"), "w") as f:
-            f.write(report_md)
+    # Insight Agent
+    insight_agent = InsightAgent(config=config)
+    raw_hypotheses = insight_agent.generate(plan=plan, summaries=summaries)
+    log_event("insight_agent", {"num_hypotheses": len(raw_hypotheses)})
 
-        # logs
-        write_json(trace, os.path.join(self.cfg["logs_dir"], f"run_trace_{ts}.json"))
-        print("Run complete. Reports written to", self.cfg["reports_dir"])
+    # Evaluator
+    evaluator = EvaluatorAgent(config=config)
+    validated_insights = evaluator.evaluate(
+        hypotheses=raw_hypotheses, summaries=summaries
+    )
+    log_event("evaluator", {"num_validated": len(validated_insights)})
 
-    def _build_report(self, evaluated, creatives, data_summary, plan):
-        # produce short markdown report; Insight -> Evidence -> Recommendation
-        lines = ["# Kasparro Agentic FB Performance Analyst Report", ""]
-        lines.append("## Executive Summary")
-        lines.append(f"- Query: {plan.get('query', 'N/A')}")
+    # Creative Generator
+    creative_agent = CreativeGeneratorAgent(config=config)
+    creatives = creative_agent.generate(
+        df=df, validated_insights=validated_insights, summaries=summaries
+    )
+    log_event("creative_generator", {"num_creatives": len(creatives)})
+
+    # Write outputs
+    Path("reports").mkdir(parents=True, exist_ok=True)
+
+    insights_path = Path("reports/insights.json")
+    creatives_path = Path("reports/creatives.json")
+    report_path = Path("reports/report.md")
+
+    with open(insights_path, "w") as f:
+        json.dump(validated_insights, f, indent=2)
+
+    with open(creatives_path, "w") as f:
+        json.dump(creatives, f, indent=2)
+
+    # Build a simple report.md using the insights
+    report_md = _build_report_md(user_query, validated_insights, summaries)
+    with open(report_path, "w") as f:
+        f.write(report_md)
+
+    log_event(
+        "done",
+        {
+            "insights_path": str(insights_path),
+            "creatives_path": str(creatives_path),
+            "report_path": str(report_path),
+        },
+    )
+
+    return {
+        "insights": validated_insights,
+        "creatives": creatives,
+        "summaries": summaries,
+    }
+
+
+def _build_report_md(
+    user_query: str, insights: list[dict], summaries: dict
+) -> str:
+    overall = summaries["overall"]
+    baseline = overall["baseline"]
+    recent = overall["recent"]
+
+    def pct_change(new: float, old: float) -> float:
+        if old == 0:
+            return 0.0
+        return (new - old) / old * 100.0
+
+    roas_delta = pct_change(recent["roas"], baseline["roas"])
+    ctr_delta = pct_change(recent["ctr"], baseline["ctr"])
+    purch_delta = pct_change(
+        recent["purchases_per_day"], baseline["purchases_per_day"]
+    )
+
+    lines = []
+    lines.append(f"# Facebook Performance Diagnosis\n")
+    lines.append(f"**Query:** {user_query}\n")
+    lines.append("## 1. Executive Summary\n")
+    lines.append(
+        f"- ROAS dropped from **{baseline['roas']:.2f}** to "
+        f"**{recent['roas']:.2f}** (~{roas_delta:.1f}% change).\n"
+    )
+    lines.append(
+        f"- CTR shifted from **{baseline['ctr']*100:.2f}%** to "
+        f"**{recent['ctr']*100:.2f}%** (~{ctr_delta:.1f}% change).\n"
+    )
+    lines.append(
+        f"- Purchases per day changed from **{baseline['purchases_per_day']:.0f}** "
+        f"to **{recent['purchases_per_day']:.0f}** (~{purch_delta:.1f}% change).\n"
+    )
+
+    lines.append("\n## 2. Key Insights\n")
+    for hyp in insights:
+        lines.append(f"### {hyp['id']}\n")
+        lines.append(f"- **Summary:** {hyp['summary']}\n")
+        lines.append(f"- **Dimension:** `{hyp['dimension']}`\n")
+        lines.append(f"- **Status:** `{hyp['status']}`\n")
+        lines.append(
+            f"- **Confidence:** {hyp['confidence_final']:.2f} | "
+            f"**Impact:** {hyp['impact']}\n"
+        )
+        if hyp.get("evidence"):
+            lines.append("- **Evidence:**")
+            for e in hyp["evidence"]:
+                lines.append(f"  - {e}")
+        if hyp.get("suspected_causes"):
+            lines.append("- **Suspected causes:**")
+            for c in hyp["suspected_causes"]:
+                lines.append(f"  - {c}")
         lines.append("")
-        lines.append("## Top Hypotheses")
-        for h in evaluated.get("hypotheses", []):
-            lines.append(f"### {h['id']}: {h['title']}")
-            lines.append(f"- Confidence: {h['confidence']:.2f}")
-            lines.append(f"- Evidence summary: {h['evidence_summary']}")
-            lines.append("")
-        lines.append("## Creative Recommendations")
-        for c in creatives.get("recommendations", []):
-            lines.append(f"- Campaign: {c['campaign_name']}")
-            lines.append(f"  - Headline: {c['headline']}")
-            lines.append(f"  - Body: {c['body']}")
-            lines.append(f"  - CTA: {c['cta']}")
-            lines.append("")
-        return "\n".join(lines)
 
+    lines.append("## 3. Recommended Next Steps\n")
+    lines.append("- Pause or refactor the worst low-CTR clusters.")
+    lines.append("- Protect and refresh high-ROAS retargeting audiences.")
+    lines.append("- Rebuild video creatives with stronger hooks and product clarity.")
+    lines.append("- Re-run this agentic analysis weekly to track changes.\n")
+
+    return "\n".join(lines)
