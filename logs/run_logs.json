@@ -1,1 +1,7 @@
-
+{"ts": "2025-11-26T14:00:00Z", "step": "start", "payload": {"user_query": "Analyze why ROAS dropped in the last 14 days"}}
+{"ts": "2025-11-26T14:00:01Z", "step": "planner", "payload": {"plan": {"steps": ["data_agent", "insight_agent", "evaluator", "creative_generator"]}}}
+{"ts": "2025-11-26T14:00:02Z", "step": "data_agent", "payload": {"summaries_keys": ["overall", "by_audience_type", "by_creative_type", "low_ctr_clusters"]}}
+{"ts": "2025-11-26T14:00:03Z", "step": "insight_agent", "payload": {"num_hypotheses": 4}}
+{"ts": "2025-11-26T14:00:04Z", "step": "evaluator", "payload": {"num_validated": 4}}
+{"ts": "2025-11-26T14:00:05Z", "step": "creative_generator", "payload": {"num_creatives": 3}}
+{"ts": "2025-11-26T14:00:06Z", "step": "done", "payload": {"insights_path": "reports/insights.json", "creatives_path": "reports/creatives.json", "report_path": "reports/report.md"}}
