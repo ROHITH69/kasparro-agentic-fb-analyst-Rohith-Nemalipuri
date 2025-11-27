@@ -39,6 +39,7 @@ This project uses a synthetic e-commerce + Facebook Ads dataset containing:
 
 Place your dataset at:
 data/synthetic_fb_ads_undergarments.csv
+
 Or override with PowerShell:
 $env:DATA_CSV = "C:\path\to\your.csv"
 
