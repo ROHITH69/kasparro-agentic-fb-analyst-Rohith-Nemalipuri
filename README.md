@@ -71,56 +71,55 @@ Outputs a Plan (list of PlanSteps).
 **2. DataAgent**
 
 Loads CSV and returns structured summaries:
-	•	ROAS & CTR trend
-	•	audience_type breakdown
-	•	creative_type breakdown
-	•	low-CTR clusters
+-ROAS & CTR trend
+-audience_type breakdown
+-creative_type breakdown
+1low-CTR clusters
 
 Used by InsightAgent + EvaluatorAgent.
 
 **3. InsightAgent**
 
 Produces hypothesis drafts using:
-	•	Prompt templates
-	•	Data summaries
-	•	Pattern recognition
+-Prompt templates
+-Data summaries
+-Pattern recognition
 
 Each insight describes:
-	•	potential cause
-	•	pattern observed
-	•	reasoning
+-potential cause
+-pattern observed
+-reasoning
 
 **4. EvaluatorAgent**
 
 Quantitatively validates each hypothesis:
-	•	computes baseline vs recent metrics
-	•	assigns:
-	•	status → strong_support / partial / rejected
-	•	confidence_final
-	•	impact → low / medium / high
-
+-computes baseline vs recent metrics
+-assigns:
+	-status → strong_support / partial / rejected
+	-confidence_final
+	-impact → low / medium / high
 Outputs validated hypotheses stored in reports/insights.json.
 
 **5. CreativeGeneratorAgent**
 
 For low-CTR clusters:
-	•	identifies creative weaknesses
-	•	analyzes high-performing creatives
-	•	generates new creative ideas:
-	•	hooks
-	•	messages
-	•	CTAs
-	•	angles
+-identifies creative weaknesses
+-analyzes high-performing creatives
+-generates new creative ideas:
+-hooks
+-messages
+-CTAs
+-angles
 
 Outputs are stored in reports/creatives.json.
 
 **6. Orchestrator**
 
 Wires all agents and produces:
-	•	insights.json
-	•	creatives.json
-	•	report.md
-	•	logs/run_logs.json
+-insights.json
+-creatives.json
+-report.md
+-logs/run_logs.json
 
 Entry point:
 src/run.py
@@ -163,29 +162,29 @@ Outputs
 After running, you should have:
 
 reports/report.md
-	•	Human-readable summary
-	•	ROAS/CTR explanation
-	•	Top insights
-	•	Creative direction suggestions
+-Human-readable summary
+-ROAS/CTR explanation
+-Top insights
+-Creative direction suggestions
 
 reports/insights.json
 
 Each item includes:
-	•	id
-	•	summary
-	•	dimension
-	•	metrics (baseline vs recent)
-	•	suspected_causes
-	•	evidence sentences
-	•	status / confidence / impact
+-id
+-summary
+-dimension
+-metrics (baseline vs recent)
+-suspected_causes
+-evidence sentences
+-status / confidence / impact
 
 reports/creatives.json
 
 For each low-CTR cluster:
-	•	cluster info
-	•	problem summary
-	•	high-performing reference examples
-	•	new creative ideas (messages, hooks, CTAs)
+-cluster info
+-problem summary
+-high-performing reference examples
+-new creative ideas (messages, hooks, CTAs)
 
 logs/run_logs.json
 
@@ -194,28 +193,28 @@ Agent-by-agent structured JSON logs.
 Observability
 
 Every step logs a structured trace:
-	•	agent name
-	•	step id
-	•	input summary
-	•	output summary
-	•	timestamp
+-agent name
+-step id
+-input summary
+-output summary
+-timestamp
 
 Evaluators can reconstruct the entire reasoning chain.
 
 **Release & Submission Details**
-	•	Release tag required: v1.0
-	•	Command used for submission:
-  $env:DATA_CSV = "data/synthetic_fb_ads_undergarments.csv"
+-Release tag required: v1.0
+-Command used for submission:
+$env:DATA_CSV = "data/synthetic_fb_ads_undergarments.csv"
 python -m src.run "Analyze why ROAS dropped in the last 14 days"
 
 Required committed files:
-	•	reports/insights.json
-	•	reports/creatives.json
-	•	reports/report.md
-	•	logs/run_logs.json
-	•	Required PR:
-	•	Title: self-review
-	•	Description: includes reasoning choices & tradeoffs.
+-reports/insights.json
+-reports/creatives.json
+-reports/report.md
+-logs/run_logs.json
+-Required PR:
+-Title: self-review
+-Description: includes reasoning choices & tradeoffs.
 
 **Self-Review Notes**
 This PR reviews the design of the Agentic Facebook Performance Analyst system.
