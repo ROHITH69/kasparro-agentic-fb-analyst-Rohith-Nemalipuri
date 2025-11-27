@@ -200,6 +200,21 @@ System logs every step with:
 - timestamp
 Allows evaluation of reasoning flow.
 
+## Tests
+This project includes a minimal test suite to validate the EvaluatorAgent’s quantitative logic.
+
+Running Tests:
+```
+pytest tests/test_evaluator.py
+```
+What is tested
+- Metric-delta validation logic
+- Confidence score computation
+- Status assignment (strong_support, partial, rejected)
+- Basic schema integrity for evaluator outputs
+
+All tests run on the sample dataset and ensure deterministic behavior through the global random seed.
+
 ## Release & Submission
 Tag for submission: 
 ```
