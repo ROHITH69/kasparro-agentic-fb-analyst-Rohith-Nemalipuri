@@ -1,5 +1,5 @@
 # kasparro-agentic-fb-analyst-Rohith-Nemalipuri
-Hi — I’m Rohith. This repository contains my submission for the **Kasparro Agentic Facebook Performance Analyst** assignment.
+Hi,I’m Rohith. This repository contains my submission for the **Kasparro Agentic Facebook Performance Analyst** assignment.
 It builds a small agentic system that diagnoses Facebook Ads ROAS/CTR drops and proposes creative adjustments for low-CTR campaigns.
 
 ## Quick Start
