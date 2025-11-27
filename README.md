@@ -19,7 +19,7 @@ $env:DATA_CSV = "data/synthetic_fb_ads_undergarments.csv"
 # Run analysis
 python -m src.run "Analyze why ROAS dropped in the last 14 days"
 ```
-**Data**
+Data
 This project uses a synthetic e-commerce + Facebook Ads dataset containing:
 	•	campaign_name
 	•	adset_name
