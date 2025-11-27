@@ -1,7 +1,30 @@
-python: "3.10"
-random_seed: 42
-confidence_min: 0.6
-use_sample_data: false
-data_csv: "data/synthetic_fb_ads_undergarments.csv"
-sample_mode: true  # set true for sample data
+data:
+  path: "data/synthetic_fb_ads_undergarments.csv"
+  date_column: "date"
 
+windows:
+  baseline_days: 14
+  recent_days: 14
+  comparison_days: 14
+
+thresholds:
+  roas_drop_pct: 0.10        # 10% ROAS drop
+  ctr_drop_pct: 0.10         # 10% CTR drop
+  low_ctr_percentile: 0.25   # bottom 25% CTR treated as low
+  min_spend: 1000            # ignore rows with tiny spend
+  min_impressions: 10000     # ignore rows with too few impressions
+
+agents:
+  planner:
+    model: "gpt-4o-mini"
+  data_agent:
+    model: "gpt-4o-mini"
+  insight_agent:
+    model: "gpt-4o-mini"
+  evaluator_agent:
+    model: "gpt-4o-mini"
+  creative_agent:
+    model: "gpt-4o-mini"
+
+logging:
+  log_file: "logs/run_logs.json"
