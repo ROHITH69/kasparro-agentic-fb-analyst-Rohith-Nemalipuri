@@ -4,24 +4,30 @@ It builds a small agentic system that diagnoses Facebook Ads ROAS/CTR drops and 
 
 ## Quick Start
 
-Tested on *Python 3.10 (Windows)*.
-```bash
-python -V  # should be >= 3.10
-
-# create and activate venv (PowerShell)
+Tested on *Python 3.10+ (Windows)*.
+```
+# 1) Create & activate virtual env (cross-platform)
+# Windows (PowerShell)
 python -m venv .venv
-.venv\Scripts\Activate.ps1
+.venv\\Scripts\\Activate.ps1
 
-# install dependencies
+# macOS / Linux (bash)
+python3 -m venv .venv
+source .venv/bin/activate
+
+# 2) Install pinned dependencies
 pip install -r requirements.txt
 
-# set data path (PowerShell)
+# 3) Set data path (example)
+# Windows PowerShell
 $env:DATA_CSV = "data/synthetic_fb_ads_undergarments.csv"
 
-# run main pipeline
+# macOS / Linux (bash)
+export DATA_CSV="data/synthetic_fb_ads_undergarments.csv"
+
+# 4) Run the orchestrator (use one canonical command)
 python -m src.run "Analyze why ROAS dropped in the last 14 days"
 ```
-
 ## Data
 
 This project uses a synthetic e-commerce + Facebook Ads dataset with the following columns:
