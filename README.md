@@ -5,7 +5,7 @@ It builds a small agentic system that diagnoses Facebook Ads ROAS/CTR drops and 
 ## Quick Start
 
 Tested on *Python 3.10+ (Windows)*.
-```
+```bash
 # 1) Create & activate virtual env (cross-platform)
 # Windows (PowerShell)
 python -m venv .venv
