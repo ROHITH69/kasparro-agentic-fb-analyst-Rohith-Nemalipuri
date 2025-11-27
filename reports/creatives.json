@@ -5,7 +5,7 @@
     "current_examples": [],
     "diagnosis": [
       "CTR is substantially below account average, indicating weak thumb-stop rate.",
-      "Messaging likely leans on generic 'seamless everyday comfort' without clear problem or proof."
+      "Messaging likely leans on generic comfort/invisibility without clear problem or proof."
     ],
     "recommendations": {
       "angle": "Fit anxiety + invisibility + everyday confidence",
@@ -16,8 +16,8 @@
       ],
       "primary_text_variants": [
         "If your current bra leaves lines on every tee, switch to a seamless fit that stays invisible under even the clingiest tops.",
-        "Stop choosing outfits around your bra. Our seamless, wire-free design stays smooth under tees, shirts, and dresses — all day.",
-        "Straps that don’t dig, cups that don’t gap, and a back that doesn’t roll. This is the everyday bra you can actually forget about."
+        "Stop choosing outfits around your bra. Our seamless, wire-free design stays smooth under tees, shirts, and dresses \u2014 all day.",
+        "Straps that don\u2019t dig, cups that don\u2019t gap, and a back that doesn\u2019t roll. This is the everyday bra you can actually forget about."
       ],
       "cta_variants": [
         "Find Your Seamless Fit",
@@ -31,25 +31,25 @@
     "problem": "CTR 0.60% (~53% below account average) and ROAS 7.85 with spend 4287.",
     "current_examples": [],
     "diagnosis": [
-      "Strong ROAS but very low CTR suggests a promising offer that too few people click to see.",
-      "Top-of-funnel hooks likely do not highlight the most compelling benefit."
+      "CTR is substantially below account average, indicating weak thumb-stop rate.",
+      "Messaging likely leans on generic comfort/invisibility without clear problem or proof."
     ],
     "recommendations": {
-      "angle": "Lead with benefit and outcome",
+      "angle": "Fit anxiety + invisibility + everyday confidence",
       "headline_variants": [
-        "The bra that doesn’t show up in photos — but changes how you feel.",
-        "From zoom calls to night outs — one bra, no lines.",
-        "Your 'throw-on-and-go' seamless bra."
+        "No lines. No digging. Just an everyday bra you forget you're wearing.",
+        "Your T-shirt bra that never shows up in photos.",
+        "One bra for work, errands, and nights out."
       ],
       "primary_text_variants": [
-        "One bra that works under tees, shirts, and dresses. Seamless cups, smooth back, and straps that stay put all day.",
-        "If you’re tired of switching bras for every outfit, try a seamless bra that looks invisible but feels supportive.",
-        "Seamless, wire-free, and made for long days. This is the bra you grab without thinking twice."
+        "If your current bra leaves lines on every tee, switch to a seamless fit that stays invisible under even the clingiest tops.",
+        "Stop choosing outfits around your bra. Our seamless, wire-free design stays smooth under tees, shirts, and dresses \u2014 all day.",
+        "Straps that don\u2019t dig, cups that don\u2019t gap, and a back that doesn\u2019t roll. This is the everyday bra you can actually forget about."
       ],
       "cta_variants": [
-        "See Seamless Styles",
-        "Shop Everyday Essentials",
-        "Find Your Size"
+        "Find Your Seamless Fit",
+        "Upgrade Your Everyday Bra",
+        "Shop Invisible Bras"
       ]
     }
   },
@@ -58,25 +58,25 @@
     "problem": "CTR 0.61% (~52% below account average) and ROAS 3.70 with spend 4679.",
     "current_examples": [],
     "diagnosis": [
-      "Low CTR and weaker ROAS suggest both thumb-stop and conversion issues.",
-      "Lookalike audience may be cold; message must work harder on first impression."
+      "CTR is substantially below account average, indicating weak thumb-stop rate.",
+      "Messaging likely leans on generic comfort/invisibility without clear problem or proof."
     ],
     "recommendations": {
-      "angle": "Problem-first + promise of comfort",
+      "angle": "Fit anxiety + invisibility + everyday confidence",
       "headline_variants": [
-        "Bras that dig, poke, and show lines? This one doesn’t.",
-        "Hate visible lines? Start here.",
-        "Your first truly forgettable bra (in a good way)."
+        "No lines. No digging. Just an everyday bra you forget you're wearing.",
+        "Your T-shirt bra that never shows up in photos.",
+        "One bra for work, errands, and nights out."
       ],
       "primary_text_variants": [
-        "If your bra leaves marks by lunchtime, it’s time for an upgrade. Seamless, wire-free support that doesn’t dig or roll.",
-        "No more adjusting straps in every mirror. This seamless bra stays in place and stays invisible under clothes.",
-        "Soft cups, smooth sides, and a back that doesn’t create lines. Put it on in the morning and forget about it."
+        "If your current bra leaves lines on every tee, switch to a seamless fit that stays invisible under even the clingiest tops.",
+        "Stop choosing outfits around your bra. Our seamless, wire-free design stays smooth under tees, shirts, and dresses \u2014 all day.",
+        "Straps that don\u2019t dig, cups that don\u2019t gap, and a back that doesn\u2019t roll. This is the everyday bra you can actually forget about."
       ],
       "cta_variants": [
-        "Try Seamless Comfort",
-        "Upgrade Your Top Drawer",
-        "Shop Now"
+        "Find Your Seamless Fit",
+        "Upgrade Your Everyday Bra",
+        "Shop Invisible Bras"
       ]
     }
   }

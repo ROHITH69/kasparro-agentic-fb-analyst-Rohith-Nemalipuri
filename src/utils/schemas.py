@@ -94,3 +94,5 @@ class CreativeRecommendation:
     current_examples: List[str]
     diagnosis: List[str]
     recommendations: Dict[str, Any]
+# Backwards-compat alias so evaluator.py can import Hypothesis
+Hypothesis = ValidatedHypothesis

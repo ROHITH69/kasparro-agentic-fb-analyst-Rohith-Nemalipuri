@@ -4,15 +4,15 @@
     "summary": "Account-level ROAS in the last 14 days is lower than in the first 14 days.",
     "dimension": "date",
     "metrics": {
-      "roas_baseline": 6.103,
-      "roas_recent": 5.371,
-      "roas_change_pct": -12.0,
-      "ctr_baseline": 0.01318,
-      "ctr_recent": 0.01206,
-      "ctr_change_pct": -8.5,
-      "purchases_per_day_baseline": 3975.4,
+      "roas_baseline": 6.103167596130334,
+      "roas_recent": 5.370839558140125,
+      "roas_change_pct": -11.999146778380066,
+      "ctr_baseline": 0.013183813320513873,
+      "ctr_recent": 0.012061802395777102,
+      "ctr_change_pct": -8.51051890268299,
+      "purchases_per_day_baseline": 3975.3571428571427,
       "purchases_per_day_recent": 3584.0,
-      "purchases_per_day_change_pct": -9.8
+      "purchases_per_day_change_pct": -9.844578205013024
     },
     "suspected_causes": [
       "creative_fatigue",
@@ -33,12 +33,12 @@
     "dimension": "audience_type",
     "metrics": {
       "Broad": {
-        "spend": 1230129.32,
+        "spend": 1230129.3199999998,
         "revenue": 6155538.11,
         "impressions": 658866412,
         "clicks": 8059098.0,
         "purchases": 173790,
-        "roas": 5.003976419324759,
+        "roas": 5.00397641932476,
         "ctr": 0.012231763303180798
       },
       "Retargeting": {
@@ -55,12 +55,9 @@
       "warmer audiences",
       "higher intent users in retargeting pools"
     ],
-    "evidence": [
-      "Retargeting ROAS is 9.33 vs Broad 5.00.",
-      "CTR is similar (1.22%–1.30%), so better conversion rate likely drives the ROAS gap."
-    ],
+    "evidence": [],
     "status": "partial",
-    "confidence_final": 0.7,
+    "confidence_final": 0.9,
     "impact": "medium"
   },
   {
@@ -69,13 +66,13 @@
     "dimension": "creative_type",
     "metrics": {
       "Carousel": {
-        "spend": 306136.03,
+        "spend": 306136.02999999997,
         "revenue": 1892536.58,
         "impressions": 179330189,
         "clicks": 2294068.0,
         "purchases": 53295,
-        "roas": 6.182012389837202,
-        "ctr": 0.012792294291047821
+        "roas": 6.182011898436131,
+        "ctr": 0.012792425038931956
       },
       "Image": {
         "spend": 719101.23,
@@ -83,36 +80,33 @@
         "impressions": 413093629,
         "clicks": 5424260.0,
         "purchases": 121894,
-        "roas": 6.131844671817659,
-        "ctr": 0.013130955931064542
+        "roas": 6.131844900334825,
+        "ctr": 0.013130824634431725
       },
       "UGC": {
         "spend": 327105.86,
-        "revenue": 1932351.33,
+        "revenue": 1932351.3299999998,
         "impressions": 177265805,
         "clicks": 2370332.0,
         "purchases": 54263,
-        "roas": 5.90741903872741,
-        "ctr": 0.013371188684036276
+        "roas": 5.907418870453742,
+        "ctr": 0.013371625734585415
       },
       "Video": {
         "spend": 753236.78,
-        "revenue": 4031395.6,
+        "revenue": 4031395.6000000006,
         "impressions": 420546890,
         "clicks": 4982604.0,
         "purchases": 111692,
-        "roas": 5.352096147121302,
-        "ctr": 0.011847598299163692
+        "roas": 5.35209605670079,
+        "ctr": 0.011847915460746839
       }
     },
     "suspected_causes": [
       "weak hooks in first seconds of video",
       "less product clarity vs static formats"
     ],
-    "evidence": [
-      "Video ROAS is 5.35 vs Image 6.13 and Carousel 6.18.",
-      "Video CTR is 1.18% vs UGC 1.34%."
-    ],
+    "evidence": [],
     "status": "partial",
     "confidence_final": 0.7,
     "impact": "medium"
@@ -155,19 +149,93 @@
           "purchases": 496,
           "ctr": 0.00608150350670284,
           "roas": 3.695475168241336
+        },
+        {
+          "campaign_name": "WOMEN SEAMLESS EVERYDAY",
+          "adset_name": "Adset-4 WC",
+          "spend": 4189.75,
+          "revenue": 17706.15,
+          "impressions": 2342186,
+          "clicks": 15280.0,
+          "purchases": 406,
+          "ctr": 0.0065238200552816894,
+          "roas": 4.22606360761382
+        },
+        {
+          "campaign_name": "women seamless everyday",
+          "adset_name": "Adset-2 Broad",
+          "spend": 4205.2300000000005,
+          "revenue": 15863.22,
+          "impressions": 2394749,
+          "clicks": 15882.0,
+          "purchases": 397,
+          "ctr": 0.00663201028583789,
+          "roas": 3.7722597812723673
+        },
+        {
+          "campaign_name": "WOMEN_Seamless_Everyday",
+          "adset_name": "Adset-3 Broad",
+          "spend": 4699.74,
+          "revenue": 10382.95,
+          "impressions": 1509291,
+          "clicks": 10504.0,
+          "purchases": 258,
+          "ctr": 0.006959559157246681,
+          "roas": 2.2092605122836586
+        },
+        {
+          "campaign_name": "WOMEN  Seamless  Everyday",
+          "adset_name": "Adset-3 Broad",
+          "spend": 5558.43,
+          "revenue": 45252.88,
+          "impressions": 4135516,
+          "clicks": 28874.0,
+          "purchases": 1002,
+          "ctr": 0.006981958236892325,
+          "roas": 8.14130608822995
+        },
+        {
+          "campaign_name": "WOMEN SEAMLESS EVERYDAY",
+          "adset_name": "Adset-3 Broad",
+          "spend": 6859.12,
+          "revenue": 29873.489999999998,
+          "impressions": 3838545,
+          "clicks": 26936.0,
+          "purchases": 899,
+          "ctr": 0.007017242210264566,
+          "roas": 4.355294848318734
+        },
+        {
+          "campaign_name": "Women Seamless Everyday",
+          "adset_name": "Adset-4 WC",
+          "spend": 4477.16,
+          "revenue": 26366.64,
+          "impressions": 2793589,
+          "clicks": 20518.0,
+          "purchases": 568,
+          "ctr": 0.007344673822813592,
+          "roas": 5.889144010935504
+        },
+        {
+          "campaign_name": "WOMEN_Seamless_Everyday",
+          "adset_name": "Adset-5 LAL1",
+          "spend": 5046.8,
+          "revenue": 21684.44,
+          "impressions": 2442894,
+          "clicks": 17954.0,
+          "purchases": 546,
+          "ctr": 0.007349479756387302,
+          "roas": 4.29667115796148
         }
       ]
     },
     "suspected_causes": [
       "generic messaging that fails to stand out",
-      "creative fatigue on repeated 'seamless everyday' angle"
+      "creative fatigue on repeated angles"
     ],
-    "evidence": [
-      "Account-wide CTR is ~1.27%, but the listed clusters sit around 0.56%–0.61%.",
-      "Each cluster spends between 2600 and 4700, so they materially drag blended performance."
-    ],
-    "status": "strong_support",
-    "confidence_final": 0.88,
-    "impact": "high"
+    "evidence": [],
+    "status": "partial",
+    "confidence_final": 0.85,
+    "impact": "medium"
   }
 ]
