@@ -11,7 +11,7 @@ User query
 → final outputs in `reports/` and `logs/`.
 
 ## Text Diagram
-
+```
 PlannerAgent
   ├── DataAgent
   │     └── produces `DataSummaries`
@@ -22,6 +22,7 @@ PlannerAgent
   │     └── produces `ValidatedHypothesis` list
   └── CreativeGeneratorAgent
         └── produces `CreativeRecommendation` list
+```
         
 Orchestrator wires the agents together:
 
