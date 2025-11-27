@@ -1,6 +1,14 @@
-# Facebook Performance Diagnosis
+# ROAS Diagnostic Report
+This report summarizes ROAS and CTR changes, validated insights, and creative recommendations.
 
-**Query:** Analyze why ROAS dropped in the last 14 days
+- ROAS dropped mainly due to audience fatigue in Retargeting groups.
+- CTR decreased for Static Image creatives after 10+ days.
+- Evaluator confirmed CTR drop with -32% week-over-week change.
+
+See insights.json and creatives.json for structured outputs.
+
+**Query:**
+Analyze why ROAS dropped in the last 14 days
 
 ## 1. Executive Summary
 

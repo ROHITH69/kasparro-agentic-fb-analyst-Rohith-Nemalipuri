@@ -1,62 +1,238 @@
 # kasparro-agentic-fb-analyst-Rohith-Nemalipuri
-Hi — I’m Rohith. This repository contains my submission for the **Kasparro Agentic Facebook Performance Analyst** assignment.
+Hi,I’m Rohith. This repository contains my submission for the **Kasparro Agentic Facebook Performance Analyst** assignment.
 It builds a small agentic system that diagnoses Facebook Ads ROAS/CTR drops and proposes creative adjustments for low-CTR campaigns.
-
-The system takes a marketer query (e.g.,"Analyze ROAS drop in the last 7 days") and produces:
-- A structured set of **insights** (`reports/insights.json`)
-- **Creative improvement ideas** (`reports/creatives.json`)
-- A **human-readable diagnosis** (`reports/report.md`)
-- Basic **JSON logs** for observability (`logs/run_logs.json`)
-
-The implementation is intentionally lightweight and framework-free so you can
-inspect the agents, prompts, and orchestration clearly.
----
 
 ## Quick Start
 
+Tested on *Python 3.10+ (Windows)*.
 ```bash
-python -V  # should be >= 3.10
-
-# 1. Create and activate a virtualenv
+# 1) Create & activate virtual env (cross-platform)
+# Windows (PowerShell)
 python -m venv .venv
-# macOS / Linux:
-source .venv/bin/activate
-# Windows (PowerShell):
-# .venv\Scripts\Activate.ps1
+.venv\\Scripts\\Activate.ps1
 
-# 2. Install dependencies
+# macOS / Linux (bash)
+python3 -m venv .venv
+source .venv/bin/activate
+
+# 2) Install pinned dependencies
 pip install -r requirements.txt
 
-# 3. Run the agentic analyst
+# 3) Set data path (example)
+# Windows PowerShell
+$env:DATA_CSV = "data/synthetic_fb_ads_undergarments.csv"
+
+# macOS / Linux (bash)
 export DATA_CSV="data/synthetic_fb_ads_undergarments.csv"
-python src/run.py "Analyze why ROAS dropped in the last 14 days"
 
-# Outputs:
-# - reports/report.md
-# - reports/insights.json
-# - reports/creatives.json
-# - logs/run_logs.json
+# 4) Run the orchestrator (use one canonical command)
+python -m src.run "Analyze why ROAS dropped in the last 14 days"
 ```
------------------------------------------------------------------------------------------------------------------------------------------
-## Project plan
+## Data
 
-Phase A — Setup & data (1–2 hours)
-- Create repo and virtualenv, install requirements.
-- Place the CSV in `data/` (or create `data/sample_fb_ads.csv` for quick runs).
-- Add `config/config.yaml` and `Makefile`.
+This project uses a synthetic e-commerce + Facebook Ads dataset with the following columns:
 
-Phase B — Core agents & orchestration (3–4 hours)
-- Implement `src/run.py` and `src/orchestrator.py`.
-- Implement agents in `src/agents/`: planner, data_agent, insight_agent, evaluator, creative_generator.
+- campaign_name  
+- adset_name  
+- date  
+- spend  
+- impressions  
+- clicks  
+- ctr  
+- purchases  
+- revenue  
+- roas  
+- creative_type  
+- creative_message  
+- audience_type  
+- platform  
+- country
 
-Phase C — Prompts & reflection (1 hour)
-- Add `prompts/*.md` with Think → Analyze → Conclude and retry logic.
+Default location:
+Place your dataset at:
+```
+data/synthetic_fb_ads_undergarments.csv
+```
+Or override with PowerShell:
+```
+$env:DATA_CSV = “C:\path\to\your.csv”
+```
 
-Phase D — Validation & reports (1–2 hours)
-- Add `tests/test_evaluator.py`.
-- Run sample, generate `reports/insights.json`, `reports/creatives.json`, `reports/report.md`.
-- Save traces to `logs/`.
+### Config
+Configuration is stored at:
+```
+config/config.yaml
+```
+Example:
+```
+python: “3.10”
+random_seed: 42
+confidence_min: 0.6
+use_sample_data: false
+```
+Meaning:
+- random_seed → ensures reproducible insights
+- confidence_min → minimum evaluator score for insight acceptance
+- use_sample_data → for optional small test CSV
 
-Phase E — Finalize submission (30–60 minutes)
-- Make 3+ commits, create PR "self-review", tag `v1.0`, push, and share repo link + commit hash + run command.
+## Architecture Overview
+
+## 1.PlannerAgent
+Breaks the marketer query into structured subtasks:
+- trend analysis
+- audience comparison
+- creative breakdown
+- cluster detection
+- hypothesis generation
+
+Outputs a Plan.
+
+## 2.DataAgent
+Loads CSV and returns structured summaries:
+- ROAS & CTR trend
+- audience_type breakdown
+- creative_type breakdown
+- low-CTR clusters
+
+## 3.InsightAgent
+Produces hypothesis drafts using:
+- prompt templates
+- data summaries
+- pattern recognition
+
+## 4.EvaluatorAgent
+Quantitatively validates each hypothesis with metric deltas:
+- assigns status: strong_support, partial, rejected
+- assigns confidence_final
+- assigns impact
+
+## 5.CreativeGeneratorAgent
+For low-CTR clusters:
+- detects creative weaknesses
+- studies high-performing creatives
+- generates new creative ideas (hooks, messages, CTAs)
+
+## 6.Orchestrator
+Wires all agents and produces:
+
+- insights.json
+- creatives.json
+- report.md
+- logs/run_logs.json
+
+Entry point: 
+```
+src/run.py
+```
+
+**Repository Structure**
+```
+config/config.yaml
+data/
+synthetic_fb_ads_undergarments.csv
+prompts/
+(Markdown templates for all agents)
+logs/
+run_logs.json
+reports/
+report.md
+insights.json
+creatives.json
+src/
+run.py
+orchestrator.py
+agents/
+planner.py
+data_agent.py
+insight_agent.py
+evaluator.py
+creative_generator.py
+utils/
+schemas.py
+io.py
+logging_utils.py
+tests/
+test_evaluator.py
+```
+Running the System
+```
+$env:DATA_CSV = “data/synthetic_fb_ads_undergarments.csv”
+python -m src.run “Analyze why ROAS dropped in the last 14 days”
+```
+or:
+```
+python src/run.py “Analyze ROAS trend last 7 days”
+```
+## Outputs
+After running you should have:
+**reports/report.md**
+- Human-readable summary
+- ROAS/CTR explanations
+- Top Insights
+- Creative direction suggestions
+
+## reports/insights.json
+Contains:
+- id
+- summary
+- dimension
+- metrics
+- suspected_causes
+- evidence
+- status/condidence/impact
+
+## reports/creatives.json
+for each low-CTR cluster:
+- cluster info
+- problem summary
+- high-performing reference examples
+- new creative ideas(messages,hooks,CTAs)
+
+## logs/run_logs.json
+Structured log for each agent execution.
+
+Observability
+System logs every step with:
+- agent name
+- step ID
+- input summary
+- output summary
+- timestamp
+Allows evaluation of reasoning flow.
+
+## Release & Submission
+Tag for submission: 
+```
+v1.0
+```
+
+## Run command used:
+```
+$env:DATA_CSV = “data/synthetic_fb_ads_undergarments.csv”
+python -m src.run “Analyze why ROAS dropped in the last 14 days”
+```
+Committed files required:
+- reports/insights.json
+- reports/creatives.json
+- reports/report.md
+- logs/run_logs.json
+
+## PR required:
+Title: self-review
+Contains design rationale.
+
+## Self-Review Notes
+
+This PR reviews the design of the Agentic Facebook Performance Analyst system.
+- **PlannerAgent**: creates structured multi-step analysis plan.
+- **DataAgent**: summarizes dataset (trend, audience, creatives, clusters).
+- **InsightAgent**: forms hypotheses using prompt-driven reasoning.
+- **EvaluatorAgent**: runs quantitative checks and assigns confidence levels.
+- **CreativeGeneratorAgent**: generates new creative ideas grounded in dataset behavior.
+- Orchestrator: manages execution, logging, and final report creation.
+
+Tradeoffs:
+- Simple statistical evaluation instead of causal models
+- Prompts tuned for synthetic dataset
+- Deterministic seeds for reproducibility
 

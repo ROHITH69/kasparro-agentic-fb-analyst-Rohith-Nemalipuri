@@ -1,11 +1,11 @@
-PYTHON ?= python
+.PHONY: setup run test
 
-.PHONY: install run test format lint
-install:
-	$(PYTHON) -m venv .venv
-	. .venv/bin/activate && pip install -r requirements.txt
+setup:
+	python -m venv .venv
+	.venv/bin/pip install -r requirements.txt
+
 run:
-	@[ -n "$$QUERY" ] || (echo "Usage: make run QUERY='Analyze ROAS drop'"; exit 1)
-	$(PYTHON) src/run.py "$(QUERY)"
+	python -m src.run "Analyze why ROAS changed"
+
 test:
-	\tpytest -q
+	pytest -q
