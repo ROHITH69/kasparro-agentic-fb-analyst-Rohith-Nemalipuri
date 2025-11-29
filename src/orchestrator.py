@@ -19,7 +19,7 @@ def run_query(user_query: str) -> Dict[str, Any]:
     config = load_config()
     df: pd.DataFrame = load_data(config)
 
-    log_event("start", {"user_query": user_query})
+    log_event("start", {"run_id": run_id, "user_query": user_query})
 
     # Planner
     planner = PlannerAgent(config=config)
@@ -51,11 +51,12 @@ def run_query(user_query: str) -> Dict[str, Any]:
     log_event("creative_generator", {"num_creatives": len(creatives)})
 
     # Write outputs
-    Path("reports").mkdir(parents=True, exist_ok=True)
+   output_dir = Path(f"reports/{run_id}")
+output_dir.mkdir(parents=True, exist_ok=True)
 
-    insights_path = Path("reports/insights.json")
-    creatives_path = Path("reports/creatives.json")
-    report_path = Path("reports/report.md")
+insights_path = output_dir / "insights.json"
+creatives_path = output_dir / "creatives.json"
+report_path = output_dir / "report.md"
 
     with open(insights_path, "w") as f:
         json.dump(validated_insights, f, indent=2)
