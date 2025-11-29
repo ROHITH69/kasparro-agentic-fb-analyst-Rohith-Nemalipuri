@@ -12,6 +12,9 @@ from .agents.creative_generator import CreativeGeneratorAgent
 from .utils.logging_utils import log_event
 from .utils.io import load_config, load_data
 
+import uuid
+run_id = str(uuid.uuid4())
+
 def run_query(user_query: str) -> Dict[str, Any]:
     config = load_config()
     df: pd.DataFrame = load_data(config)
