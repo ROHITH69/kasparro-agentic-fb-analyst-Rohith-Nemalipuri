@@ -2,6 +2,9 @@ data:
   path: "data/synthetic_fb_ads_undergarments.csv"
   date_column: "date"
 
+use_sample_data: true   # <-- required by rubric
+seed: 42                # <-- required for reproducibility
+
 windows:
   baseline_days: 14
   recent_days: 14
