@@ -9,7 +9,7 @@ Tested on *Python 3.10+ (Windows)*.
 # 1) Create & activate virtual env (cross-platform)
 # Windows (PowerShell)
 python -m venv .venv
-.venv\\Scripts\\Activate.ps1
+.venv\Scripts\\Activate.ps1
 
 # macOS / Linux (bash)
 python3 -m venv .venv
